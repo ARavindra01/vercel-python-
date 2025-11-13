@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Vercel App</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        #message { margin-top: 20px; font-weight: bold; color: #007bff; }
+    </style>
+</head>
+<body>
+    <h1>My Python Website on Vercel</h1>
+    <p>Click the button to get a message from the Python backend:</p>
+    
+    <button id="fetchButton">Fetch Data from Python</button>
+    
+    <h2 id="message"></h2>
+
+    <script>
+        document.getElementById('fetchButton').onclick = async () => {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = 'Loading...';
+            
+            try {
+                // This URL '/api/greet' is a "serverless function"
+                const response = await fetch('/api/greet'); 
+                const data = await response.json();
+                messageElement.textContent = data.message;
+            } catch (error) {
+                messageElement.textContent = 'Error fetching data.';
+            }
+        };
+    </script>
+</body>
+</html>
